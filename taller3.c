@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 #define TAMANO 1024
@@ -30,6 +31,7 @@ int main (int argc, char *argv[]){
     //parametro argc son en numero de parametros que se han enviado, en un principio sera 1(nombre del ejecutable)
     
     cifradoCiclico(argv[argc-1],atoi(argv[argc-2]));
+    printf("\n");
     return 0;
 }
 
@@ -37,7 +39,7 @@ int main (int argc, char *argv[]){
 //esta funcion me da la frase cifrada a la llave que le demos.
 void cifradoCiclico(char frase[], int llave){
     int i=0,tam;
-    char tmp[TAMANO];
+    char tmp[TAMANO], tmp1[TAMANO];
     for (i=0; i<TAMANO; i++){
         if(frase[i]!='\0'){
             if(llave>0){
@@ -71,24 +73,33 @@ void cifradoCiclico(char frase[], int llave){
         }
     }
     printf("Cifrado llave %d: %s\n\n",llave,tmp);
+    printf("\n");
+    strcpy(tmp1,tmp);
+    printf("clave morse es: ");
+    codigoMorse(tmp1);
 }
 
 //funcion para transformar una frase a codigo morse
 void codigoMorse (char mensaje[]){
 
-    char morse[TAMANO];
-    int i;
+    int i,j;
+    //almacene el abcdario en un arreglo para ser comparado despues
+    char abc[37]={'A','A','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U'
+    ,'V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0',' '};
+    //almacene las letras y numeros en morse para comparar despues
+    char morse[37][6] = {{".-"},{"-..."},{"-.-."},{"-.."},{"."},{"..-."},{"--."},{"...."},{".."},{".---"}
+    ,{"-.-"},{".-.."},{"--"},{"-."},{"---"},{".--."},{"--.-"},{".-."},{"..."},{"-"},{"..-"},{"...-"},{".--"}
+    ,{"-..-"},{"-.--"},{"--.."},{".----"},{"..---"},{"...--"},{"....-"},{"....."},{"-...."},{"--..."},{"---.."}
+    ,{"----."},{"-----"},{"//"}}; 
 
-    for (i=0; i<TAMANO; i++){
-        if(mensaje[i]!='\0'){
-            switch(mensaje[i]){
-                case 'A':
-                    morse[i]=".-";
-                default:
-                    break;
+    for(i=0;i<mensaje[i]; i++){
+        for(j=0; j<37; j++){
+            //si concuerda la letra con la letra del abcdario pues procede a sacar el indice para 
+            //poder utilizar ese indice en la obtencion de la clave morse para cada letra
+            if(mensaje[i]==abc[j]){
+                printf("%s ",morse[j]);
             }
-        }else{
-            break;
         }
     }
+    printf("\n");
 }
