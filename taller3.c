@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
 #define TAMANO 1024
@@ -7,30 +8,30 @@
 
 //funciones
 void cifradoCiclico(char frase[], int llave);
+void codigoMorse (char mensaje[]);
 
-int main (){
-    char *mensaje;
-    int llave,tam;
-    size_t bufsize = TAMANO;
-    size_t characters;
-    //Inicializacion del puntero..dandole memoria dinamica
-    mensaje = (char *)malloc(bufsize * sizeof(char));
-    if( mensaje == NULL)
-    {
-        perror("Unable to allocate mensaje");
-        exit(1);
-    }
+int main (int argc, char *argv[]){
+    int llave,tam,i;
     printf("\n********************************\n");
     printf("********Cifrado Ciclico*********\n");
     printf("********************************\n");
     printf("\n");
-    printf("ingrese el mensaje a Cifrar: ");
-    //captura lo que se escribe un una linea...sirve para capturar los espacios entre palabras.
-    characters = getline(&mensaje,&bufsize,stdin);
-    printf("ingrese el numero de llave: ");
-    scanf("%d",&llave);
+    //prueba si hay algun argumento enviado por consola
+    /*if ( argc == 1 ) {
+        printf( "No arguments were passed.\n" );
+    } else {
+        printf( "Hay argumentos desde consola" );
+        for(i=0; i<argc;i++){
+            printf("\n %s \n",argv[i]);
+        }
+    }*/
+
     //funcion a utilizar
-    cifradoCiclico(mensaje,llave);
+    //le mandamos el parametro argv[argc-1] para capturar lo  le enviamos por consola
+    //parametro argc son en numero de parametros que se han enviado, en un principio sera 1(nombre del ejecutable)
+    
+    cifradoCiclico(argv[argc-1],atoi(argv[argc-2]));
+    printf("\n");
     return 0;
 }
 
@@ -38,7 +39,7 @@ int main (){
 //esta funcion me da la frase cifrada a la llave que le demos.
 void cifradoCiclico(char frase[], int llave){
     int i=0,tam;
-    char tmp[TAMANO];
+    char tmp[TAMANO], tmp1[TAMANO];
     for (i=0; i<TAMANO; i++){
         if(frase[i]!='\0'){
             if(llave>0){
@@ -72,4 +73,33 @@ void cifradoCiclico(char frase[], int llave){
         }
     }
     printf("Cifrado llave %d: %s\n\n",llave,tmp);
+    printf("\n");
+    strcpy(tmp1,tmp);
+    printf("clave morse es: ");
+    codigoMorse(tmp1);
+}
+
+//funcion para transformar una frase a codigo morse
+void codigoMorse (char mensaje[]){
+
+    int i,j;
+    //almacene el abcdario en un arreglo para ser comparado despues
+    char abc[37]={'A','A','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U'
+    ,'V','W','X','Y','Z','1','2','3','4','5','6','7','8','9','0',' '};
+    //almacene las letras y numeros en morse para comparar despues
+    char morse[37][6] = {{".-"},{"-..."},{"-.-."},{"-.."},{"."},{"..-."},{"--."},{"...."},{".."},{".---"}
+    ,{"-.-"},{".-.."},{"--"},{"-."},{"---"},{".--."},{"--.-"},{".-."},{"..."},{"-"},{"..-"},{"...-"},{".--"}
+    ,{"-..-"},{"-.--"},{"--.."},{".----"},{"..---"},{"...--"},{"....-"},{"....."},{"-...."},{"--..."},{"---.."}
+    ,{"----."},{"-----"},{"//"}}; 
+
+    for(i=0;i<mensaje[i]; i++){
+        for(j=0; j<37; j++){
+            //si concuerda la letra con la letra del abcdario pues procede a sacar el indice para 
+            //poder utilizar ese indice en la obtencion de la clave morse para cada letra
+            if(mensaje[i]==abc[j]){
+                printf("%s ",morse[j]);
+            }
+        }
+    }
+    printf("\n");
 }
