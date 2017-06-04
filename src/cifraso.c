@@ -43,3 +43,53 @@ void cifradoCiclico(char frase[], int llave){
     codigoMorse(tmp1);
 }
 
+ // funcion de codificacion por contraseña
+void cifradoContrasena (char mensaje[],char llave[])
+{
+    //declaracion de variables internas
+    int i,j,k;
+    char tmp[26];
+    char salida[strlen(mensaje)];
+    char abc[26]={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    //la contraseña debe ser menor que el numero de caracteres del alfabeto
+    if(strlen(llave)<26)
+    {
+        //se llena un arreglo temporal con la contraseña y desplazando el resto del alfabeto
+        for(i=0;i<26;i++)
+        {
+            if(i<strlen(llave))
+            {
+                tmp[i]=llave[i];
+            }
+            else
+            {
+                tmp[i]=abc[i-strlen(llave)];
+            }
+        }
+        // se cifra el mensaje con el arreglo temporal
+        for(j=0;j<(strlen(mensaje)-1);j++)
+        {
+            if(mensaje[j]==' ')
+            {
+                salida[j]=mensaje[j];
+            }
+            else
+            {
+                for(k=0;k<26;k++)
+                {
+                    if(mensaje[j]==abc[k])
+                    {
+                        salida[j]=tmp[k];
+                    }
+                }
+            }
+        }
+        //imprimimos la salida
+        printf("%s\n",salida);
+    }
+    else
+    {
+        printf("Ingrese una clave que no exceda los 26 caracteres\n");
+        printf("%s\n",salida);
+    }
+}

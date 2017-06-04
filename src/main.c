@@ -6,14 +6,11 @@
 
 #define TAMANO 1024
 
-//using namespace std;
-
-//funciones
-void cifradoCiclico(char frase[], int llave);
-void codigoMorse (char mensaje[]);
-
 int main (int argc, char *argv[]){
     int llave,tam,i;
+    char tipo[3]={'C','A','P'};
+    char *clave;
+    char contrasena[TAMANO];
     char *mensaje;
     size_t bufsize = TAMANO;
     size_t characters;
@@ -25,20 +22,35 @@ int main (int argc, char *argv[]){
         exit(1);
     }
     printf("\n********************************\n");
-    printf("********Cifrado Ciclico*********\n");
-    printf("********************************\n");
+    printf("*******Cifrado de Mensajes********\n");
+    printf("**********************************\n");
     printf("\n");
 
     //prueba si hay algun argumento enviado por consola
     if ( argc == 1 ) {
         printf( "No Hay argumentos desde consola.\n\n" );
-        printf("ingrese el mensaje a Cifrar: ");
-        //captura lo que se escribe un una linea...sirve para capturar los espacios entre palabras.
-        characters = getline(&mensaje,&bufsize,stdin);
-        printf("ingrese el numero de llave: ");
-        scanf("%d",&llave);
-        //funcion a utilizar
-        cifradoCiclico(mensaje,llave);
+        printf("Ingrese el tipo de cifrado: ");
+        scanf("%c",clave);
+        if(clave[0]==tipo[0])
+        {
+             printf("ingrese el mensaje a Cifrar: ");
+            //captura lo que se escribe un una linea...sirve para capturar los espacios entre palabras.
+            characters = getline(&mensaje,&bufsize,stdin);
+            printf("ingrese el numero de llave: ");
+            scanf("%d",&llave);
+            //funcion a utilizar
+            cifradoCiclico(mensaje,llave);
+        }
+        if(clave[0]==tipo[1])
+        {
+             printf("ingrese el mensaje a Cifrar: ");
+            //captura lo que se escribe un una linea...sirve para capturar los espacios entre palabras.
+            characters = getline(&mensaje,&bufsize,stdin);
+            printf("ingrese el numero de llave: ");
+            scanf("%s",&contrasena);
+            //funcion a utilizar
+            cifradoContrasena(mensaje,llave);
+        }
     } else {
         printf( "Hay argumentos desde consola\n\n" );
         //funcion a utilizar
