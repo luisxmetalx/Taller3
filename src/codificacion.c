@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <codificacion.h>
+#include "codificacion.h"
 //funcion para transformar una frase a codigo morse
 void codigoMorse (char mensaje[]){
 
