@@ -2,34 +2,28 @@
 #include <string.h>
 #include <stdlib.h>
 #include "cifraso.h"
-#include "codificacion.h"
 
 #define TAMANO 1024
 
 int main (int argc, char *argv[]){
-    int llave,tam,i,opciones;
-    //char contrasena[TAMANO];
+    int llave,opciones;
     char mensaje[100],txtLlave[100];
-    size_t bufsize = TAMANO;
-    size_t characters;
-    //Inicializacion del puntero..dandole memoria dinamica
-    mensaje = (char *)malloc(bufsize * sizeof(char));
     if( mensaje == NULL)
     {
         perror("Unable to allocate mensaje");
         exit(1);
     }
     printf("\n********************************\n");
-    printf("*******Cifrado de Mensajes********\n");
-    printf("**********************************\n");
+    printf("********Cifrado Ciclico*********\n");
+    printf("********************************\n");
     printf("\n");
 
     //prueba si hay algun argumento enviado por consola
     if ( argc == 1 ) {
         printf( "No Hay argumentos desde consola.\n\n" );
-        printf( "1. cifrado ciclico.\n" );
-        printf( "2. cifrado por contraseña.\n" );
-        printf( "3. cifrado por llave.\n\n" );
+        printf( "1. Cifrado ciclico.\n" );
+        printf( "2. Cifrado por contraseña.\n" );
+        printf( "3. Cifrado por llave.\n\n" );
         printf( "Ingrese su opcion: " );
         scanf("%d",&opciones);
 
@@ -47,14 +41,14 @@ int main (int argc, char *argv[]){
             case 2:
                 printf("ingrese el mensaje a Cifrar: ");
                 scanf("%s",mensaje);
-                printf("ingrese el numero de llave: ");
+                printf("ingrese la contraseña: ");
                 scanf("%s",txtLlave);
                 cifradoContrasena(mensaje,txtLlave);
                 break;
             case 3:
                 printf("ingrese el mensaje a Cifrar: ");
                 scanf("%s",mensaje);
-                printf("ingrese el numero de llave: ");
+                printf("ingrese la llave: ");
                 scanf("%s",txtLlave);
                 cifradoAutollave(mensaje,txtLlave);
                 break;

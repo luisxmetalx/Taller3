@@ -1,1 +1,1 @@
-void claveMorse(char mensaje[]);
+void codigoMorse(char mensaje[]);

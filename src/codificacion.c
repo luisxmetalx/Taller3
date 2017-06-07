@@ -2,7 +2,6 @@
 #include "codificacion.h"
 //funcion para transformar una frase a codigo morse
 void codigoMorse (char mensaje[]){
-
     int i,j;
     //almacene el abcdario en un arreglo para ser comparado despues
     char abc[37]={'A','A','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U'

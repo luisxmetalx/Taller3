@@ -1,8 +1,10 @@
 #include <stdio.h>
+#include <string.h>
 #include "cifraso.h"
 #include "codificacion.h"
+#define TAMANO 1024
 void cifradoCiclico(char frase[], int llave){
-    int i=0,tam;
+    int i;
     char tmp[TAMANO], tmp1[TAMANO];
     for (i=0; i<TAMANO; i++){
         if(frase[i]!='\0'){
@@ -85,7 +87,7 @@ void cifradoContrasena (char mensaje[],char llave[])
             }
         }
         //imprimimos la salida
-        printf("%s\n",salida);
+        printf("El mensaje cifrado: %s\n",salida);
     }
     else
     {
